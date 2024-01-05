@@ -7,9 +7,9 @@ router.post('/',async(req,res)=>{
     const applicationData=new application({
         coverLetter:req.body.coverLetter,
         body:req.body.body,
-        user:req.bo.user,
-        company:body.company,
-        category:bo.category,
+        user:req.body.user,
+        company:req.body.company,
+        category:req.body.category,
   
         ApplicationId:req.body.ApplicationId
     })
