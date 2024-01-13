@@ -7,7 +7,10 @@ category:String,
 aboutCompany:String,
 aboutJob:String,
 Whocanapply:String,
-
+createdAt:{
+    type:Date,
+    default:Date.now,
+},
 perks:Array,
 numberOfopning:String,
 CTC:String,

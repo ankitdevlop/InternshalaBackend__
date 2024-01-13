@@ -2,19 +2,32 @@
 const express = require('express');
 const router = express.Router();
 const Internship = require('../model/Interships'); // Adjust the path accordingly
-const dataToUpload = require('../uploadData/InternshipDatAvl'); // Adjust the path accordingly
+
 
 router.post('/', async (req, res) => {
-  try {
-    // Use the data from the external file
-    const result = await Internship.insertMany(dataToUpload);
+  const Internships=new Internship({
+    title:req.body.title,
+    company:req.body.company,
+    location:req.body.location,
+    category:req.body.category,
+    aboutCompany:req.body.aboutCompany,
+    aboutJob:req.body.aboutJob,
+    Whocanapply:req.body.Whocanapply,
+    perks:req.body.perks,
+    numberOfopning:req.body.numberOfopning,
+    CTC:req.body.CTC,
+    StartDate:req.body.StartDate,
+    stipend:req.body.stipend,
+    AdditionalInfo:req.body.AdditionalInfo,
+    
+    })
+    await Internships.save().then((data)=>{
+      res.send(data)
+      }).catch((err)=>{
+          console.error(err);
+      })
+    });
 
-    res.status(201).json({ success: true, result });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, error: 'Internal Server Error' });
-  }
-});
 router.get('/', async (req, res) => {
   try {
     // Fetch all documents from the Internship collection

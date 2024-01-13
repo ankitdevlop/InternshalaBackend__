@@ -13,6 +13,9 @@ stipend:String,
 StartDate:String,
 Duration:String,
 AdditionalInfo:String,
-
+createdAt:{
+    type:Date,
+    default:Date.now,
+},
 })
 module.exports=mongoose.model("InternShipData",InternshipSchema)

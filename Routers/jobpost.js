@@ -2,18 +2,31 @@
 const express = require('express');
 const router = express.Router();
 const jobs = require('../model/Jobs'); // Adjust the path accordingly
-const dataToUpload = require('../uploadData/JobsDataAvl'); // Adjust the path accordingly
+
 
 router.post('/', async (req, res) => {
-  try {
-    // Use the data from the external file
-    const result = await jobs.insertMany(dataToUpload);
+  const JobData=new jobs({
+title:req.body.title,
+company:req.body.company,
+location:req.body.location,
+category:req.body.category,
+aboutCompany:req.body.aboutCompany,
+aboutJob:req.body.aboutJob,
+Whocanapply:req.body.Whocanapply,
 
-    res.status(201).json({ success: true, result });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, error: 'Internal Server Error' });
-  }
+perks:req.body.perks,
+numberOfopning:req.body.numberOfopning,
+CTC:req.body.CTC,
+StartDate:req.body.StartDate,
+Experience:req.body.Experience,
+AdditionalInfo:req.body.AdditionalInfo,
+
+})
+await JobData.save().then((data)=>{
+res.send(data)
+}).catch((err)=>{
+    console.error(err);
+})
 });
 router.get('/', async (req, res) => {
   try {
